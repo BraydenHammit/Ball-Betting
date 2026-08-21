@@ -20,8 +20,19 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     ball1coords = canvas.coords(ball1['shape'])
     ball2coords = canvas.coords(ball2['shape'])
     if (ball1coords[2] >= ball2coords[0] and ball1coords[0] <= ball2coords[2] and ball1coords[3] >= ball2coords[1] and ball1coords[1] <= ball2coords[3]):
-        ball1['hp'] -= ball2['damage']*(ran.uniform(0.05,5))
-        ball2['hp'] -= ball1['damage']*(ran.uniform(0.05,5))
+        ball2depletion = ball1['damage']*(ran.uniform(0.05,5))
+        ball1depletion = ball2['damage']*(ran.uniform(0.05,5))
+        ball1['hp'] -= ball1depletion
+        ball2['hp'] -= ball2depletion
+
+        if ball1['type'] == 'vampire':
+            ball1['hp'] += (0.25*ball2depletion)
+            if ball1['hp'] > ball1['max hp']:
+                ball1['hp'] = ball1['max hp']
+        if ball2['type'] == 'vampire':
+                    ball2['hp'] += (0.25*ball1depletion)
+                    if ball2['hp'] > ball2['max hp']:
+                        ball2['hp'] = ball2['max hp']
 
         ball1['dx'] = -ball1['dx']
         ball1['dy'] = -ball1['dy']

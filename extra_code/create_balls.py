@@ -1,8 +1,12 @@
 import random as ran
 
 def create_balls(canvas, root):
-    ball1type = ran.choice(['default', 'big', 'fast', 'hyperspeed'])
-    ball2type = ran.choice(['default', 'big', 'fast', 'hyperspeed'])
+    ball1type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire'])
+    ball2type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire'])
+
+
+
+
 
 
 
@@ -50,6 +54,21 @@ def create_balls(canvas, root):
             'dy': 100 - temp_dx,
             'type': 'hyperspeed'
         }
+    elif ball1type == 'vampire':
+        temp_dx = ran.uniform(0.1, 10.0)
+        ball1 = {
+            'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
+            'hp': 75,
+            'max hp': 100,
+            'damage': 10,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'type': 'vampire'
+        }
+
+
+
+
 
 
 
@@ -89,7 +108,7 @@ def create_balls(canvas, root):
     elif ball2type == 'hyperspeed':
         temp_dx = ran.uniform(0.1, 100.0)
         ball2 = {
-            'shape': canvas.create_oval(10, 10, 50, 50, fill='blue'),
+            'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
             'hp': 25,
             'max hp': 25,
             'damage': 20,
@@ -97,5 +116,20 @@ def create_balls(canvas, root):
             'dy': 100 - temp_dx,
             'type': 'hyperspeed'
         }
+    elif ball2type == 'vampire':
+        temp_dx = ran.uniform(0.1, 10.0)
+        ball2 = {
+            'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
+            'hp': 75,
+            'max hp': 100,
+            'damage': 10,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'type': 'vampire'
+        }
+    
+
+
+
     
     return ball1, ball2
