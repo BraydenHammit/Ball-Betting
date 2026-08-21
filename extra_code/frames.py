@@ -9,17 +9,17 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     ball1Mult = ran.uniform(-0.5,0.5)
     ball2Mult = ran.uniform(-0.5,0.5)
     if pos1[2] >= canvas.winfo_width() or pos1[0] <= 0:
-        ball1['dx'] = -ball1['dx'] + ball1Mult
-        ball1['dy'] -= ball1Mult
+        ball1['dx'] = -ball1['dx'] - ball1Mult
+        ball1['dy'] += ball1Mult
     if pos1[3] >= canvas.winfo_height() or pos1[1] <= 0:
-        ball1['dy'] = -ball1['dy'] + ball1Mult
-        ball1['dx'] -= ball1Mult
+        ball1['dy'] = -ball1['dy'] - ball1Mult
+        ball1['dx'] += ball1Mult
     if pos2[2] >= canvas.winfo_width() or pos2[0] <= 0:
-        ball2['dx'] = -ball2['dx'] + ball2Mult
-        ball2['dy'] -= ball2Mult
+        ball2['dx'] = -ball2['dx'] - ball2Mult
+        ball2['dy'] += ball2Mult
     if pos2[3] >= canvas.winfo_height() or pos2[1] <= 0:
-        ball2['dy'] = -ball2['dy'] + ball2Mult
-        ball2['dx'] -= ball2Mult
+        ball2['dy'] = -ball2['dy'] - ball2Mult
+        ball2['dx'] += ball2Mult
 
 
     ball1coords = canvas.coords(ball1['shape'])
