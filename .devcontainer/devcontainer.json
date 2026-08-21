@@ -1,0 +1,22 @@
+{
+  //Tkinter:
+  "name": "Tkinter GUI with Audio",
+  "image": "mcr.microsoft.com/devcontainers/python:3",
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {}
+  },
+  //Port:
+  "forwardPorts": [6080],
+  "portsAttributes": {
+    "6080": {
+      "label": "Tkinter GUI",
+      "visibility": "public"
+    }
+  }//,
+  //Audio:               (broken)
+//  "runArgs": [
+//    "--device=/dev/snd",
+//    "--group-add=audio"
+//  ],
+//  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y ffmpeg alsa-utils python3-tk"
+}
