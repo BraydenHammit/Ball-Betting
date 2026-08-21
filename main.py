@@ -1,22 +1,32 @@
 import tkinter as tk
-import random as ran
 from extra_code.create_balls import create_balls
 from extra_code.frames import frame
 
 root = tk.Tk()
-root.title("Ball Betting")
+root.title("Ball Battle Roulette")
 root.geometry("900x800")
 root.minsize(900, 800)
 try:
     root.state('zoomed')
 except: None
-root.configure(bg="#494949")
+root.configure(bg="#393939")
 money = 100
 winner = None
-bet = [None,None] #. [Ball#,$$$] 
+bet = [None,None]#       [Ball#,$$$] 
+
+
+images = {
+    'title': tk.PhotoImage(file='assets/images/title.png')
+}
+
+
+
+
 
 def start_bet():
     global ball2, ball1, textbox1, textbox2, textboxM, textboxW
+    start_button.configure(highlightbackground="#494949")
+    root.configure(bg="#494949")
     start_button.pack_forget()
     title.pack_forget()
     try:
@@ -40,7 +50,7 @@ def start_bet():
 
 
 def check_for_winner(winner):
-    global bet, money, textboxW
+    global money, textboxW
     prevmoney = money
 
     if winner == 'ball1':
@@ -89,8 +99,8 @@ def start(betNONGLOBAL):
 
 
 canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
-start_button = tk.Button(root, text="Start", highlightbackground="#494949", command=lambda: start_bet())
-title = tk.Label(root, bg="#494949", text="Ball Betting")
+start_button = tk.Button(root, text="Start", highlightbackground="#393939", command=lambda: start_bet())
+title = tk.Label(root, image=images['title'], borderwidth=0, highlightthickness=0)
 betting_enter = tk.Entry(root, highlightbackground="#494949", width=30)
 betting_ok1 = tk.Button(root, highlightbackground="#494949", text='Ball 1', command = lambda: start('ball1'))
 betting_ok2 = tk.Button(root, highlightbackground="#494949", text='Ball 2', command = lambda: start('ball2'))
