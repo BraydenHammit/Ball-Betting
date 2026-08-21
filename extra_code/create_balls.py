@@ -45,9 +45,9 @@ def create_balls(canvas, root):
             'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
             'hp': 25,
             'max hp': 25,
-            'damage': 3,
+            'damage': 20,
             'dx': temp_dx,
-            'dy': 25 - temp_dx,
+            'dy': 100 - temp_dx,
             'type': 'hyperspeed'
         }
 
@@ -92,9 +92,9 @@ def create_balls(canvas, root):
             'shape': canvas.create_oval(10, 10, 50, 50, fill='blue'),
             'hp': 25,
             'max hp': 25,
-            'damage': 3,
+            'damage': 20,
             'dx': temp_dx,
-            'dy': 25 - temp_dx,
+            'dy': 100 - temp_dx,
             'type': 'hyperspeed'
         }
     

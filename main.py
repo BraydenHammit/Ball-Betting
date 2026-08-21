@@ -1,6 +1,7 @@
 import tkinter as tk
 from extra_code.create_balls import create_balls
 from extra_code.frames import frame
+from extra_code.tooltips import toolTip, stats
 
 root = tk.Tk()
 root.title("Ball Battle Roulette")
@@ -24,7 +25,7 @@ images = {
 
 
 def start_bet():
-    global ball2, ball1, textbox1, textbox2, textboxM, textboxW
+    global ball2, ball1, textbox1, textbox2, textboxM, textboxW, tooltip1, tooltip2
     start_button.configure(highlightbackground="#494949")
     root.configure(bg="#494949")
     start_button.pack_forget()
@@ -33,8 +34,10 @@ def start_bet():
         textboxW.destroy()
     except: None
     ball1, ball2 = create_balls(canvas, root)
-    textbox1 = tk.Label(text=f'Ball 1 will be: {ball1['type'].title()}', fg='red', bg="#494949")
-    textbox2 = tk.Label(text=f'Ball 2 will be: {ball2['type'].title()}', fg='blue', bg="#494949")
+    textbox1.configure(text=f'Ball 1 will be: {ball1['type'].title()}', fg='red', bg="#494949")
+    textbox2.configure(text=f'Ball 2 will be: {ball2['type'].title()}', fg='blue', bg="#494949")
+    tooltip1.text=stats({ball1['type']})
+    tooltip2.text=stats({ball2['type']})
     textboxM = tk.Label(text=f'You have: ${money}\n\nWhat would you like to bet?', bg="#494949")
     textboxW = tk.Label(text='Who would you like to bet on?', bg="#494949")
     textbox1.pack(pady = 5)
@@ -82,8 +85,8 @@ def start(betNONGLOBAL):
     try:
         if (int(betting_enter.get()) >= 0) and (int(betting_enter.get()) <= money):
                 bet = [betNONGLOBAL,int(betting_enter.get())]
-                textbox1.destroy()
-                textbox2.destroy()
+                textbox1.pack_forget()
+                textbox2.pack_forget()
                 textboxM.destroy()
                 textboxW.destroy()
                 betting_enter.pack_forget()
@@ -106,6 +109,10 @@ betting_ok1 = tk.Button(root, highlightbackground="#494949", text='Ball 1', comm
 betting_ok2 = tk.Button(root, highlightbackground="#494949", text='Ball 2', command = lambda: start('ball2'))
 healthbar1 = tk.Label(text=None,fg='red', bg="#494949")
 healthbar2 = tk.Label(text=None,fg='blue', bg="#494949")
+textbox1 = tk.Label(text=f'Ball 1 will be: None', fg='red', bg="#494949")
+textbox2 = tk.Label(text=f'Ball 2 will be: None', fg='blue', bg="#494949")
+tooltip1 = toolTip(textbox1,None)
+tooltip2 = toolTip(textbox2,None)
 title.pack(pady=10)
 start_button.pack(pady=20)
 
