@@ -7,7 +7,9 @@ root = tk.Tk()
 root.title("Ball Betting")
 root.geometry("900x800")
 root.minsize(900, 800)
-root.state('zoomed')
+try:
+    root.state('zoomed')
+except: None
 root.configure(bg="#494949")
 money = 100
 winner = None
