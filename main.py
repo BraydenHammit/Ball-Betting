@@ -4,10 +4,11 @@ from extra_code.create_balls import create_balls
 from extra_code.frames import frame
 
 root = tk.Tk()
-root.title("Physics Test")
+root.title("Ball Betting")
 root.geometry("900x800")
 root.minsize(900, 800)
 root.state('zoomed')
+root.configure(bg="#494949")
 money = 100
 winner = None
 bet = [None,None] #. [Ball#,$$$] 
@@ -20,10 +21,10 @@ def start_bet():
         textboxW.destroy()
     except: None
     ball1, ball2 = create_balls(canvas, root)
-    textbox1 = tk.Label(text=f'Ball 1 will be: {ball1['type'].title()}', fg='red')
-    textbox2 = tk.Label(text=f'Ball 2 will be: {ball2['type'].title()}', fg='blue')
-    textboxM = tk.Label(text=f'You have: ${money}\n\nWhat would you like to bet?')
-    textboxW = tk.Label(text='Who would you like to bet on?')
+    textbox1 = tk.Label(text=f'Ball 1 will be: {ball1['type'].title()}', fg='red', bg="#494949")
+    textbox2 = tk.Label(text=f'Ball 2 will be: {ball2['type'].title()}', fg='blue', bg="#494949")
+    textboxM = tk.Label(text=f'You have: ${money}\n\nWhat would you like to bet?', bg="#494949")
+    textboxW = tk.Label(text='Who would you like to bet on?', bg="#494949")
     textbox1.pack(pady = 5)
     textbox2.pack(pady = 5)
     textboxM.pack(pady = 5)
@@ -34,10 +35,12 @@ def start_bet():
 
     root.update_idletasks()
 
-def check_for_winner():
-    global winner, bet, money
+
+
+def check_for_winner(winner):
+    global bet, money, textboxW
     prevmoney = money
-    won = True
+
     if winner == 'ball1':
         if bet[0] == 'ball1':
             money += bet[1]
@@ -48,22 +51,25 @@ def check_for_winner():
             money += bet[1]
         else:
             money -= bet[1]
-    else:
-        root.after(100,check_for_winner)
-        won = False
 
-    if won:
-        textboxW = tk.Label(text=f'{winner[0].title()+winner[1]+winner[2]+winner[3],winner[4]} won.\nYou made {prevmoney-money}, and are now at ${money}.')
-        start_button.configure(text='Ok')
-        textboxW.pack(pady = 10)
-        start_button.pack(pady = 5)
+
+    healthbar1.pack_forget()
+    canvas.pack_forget()
+    healthbar2.pack_forget()
+    textboxW = tk.Label(text=f'Ball {winner[4]} won.\nYou made ${money-prevmoney}, and are now at ${money}.',bg="#494949")
+    start_button.configure(text='Ok')
+    textboxW.pack(pady = 10)
+    start_button.pack(pady = 5)
+    winner = None
+    root.update_idletasks()
      
 
+
 def start(betNONGLOBAL):
-    global money, bet
+    global money, bet, winner, betAmount
     try:
         if (int(betting_enter.get()) >= 0) and (int(betting_enter.get()) <= money):
-                bet = betNONGLOBAL
+                bet = [betNONGLOBAL,int(betting_enter.get())]
                 textbox1.destroy()
                 textbox2.destroy()
                 textboxM.destroy()
@@ -71,21 +77,23 @@ def start(betNONGLOBAL):
                 betting_enter.pack_forget()
                 betting_ok1.pack_forget()
                 betting_ok2.pack_forget()
+                healthbar1.pack(pady=20)
                 canvas.pack(expand=True, fill='none')
+                healthbar2.pack(pady=20)
                 
-                frame(canvas=canvas, root=root, ball1=ball1, ball2=ball2, winner=winner)
+                frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner)
     except: None
 
-    root.after(100,check_for_winner)
 
 
-
-canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10",)
-start_button = tk.Button(root, text="Start", command=lambda: start_bet())
-title = tk.Label(root, text="Physics Test")
-betting_enter = tk.Entry(root, width=30)
-betting_ok1 = tk.Button(root, text='Ball 1', command = lambda: start('ball1'))
-betting_ok2 = tk.Button(root, text='Ball 2', command = lambda: start('ball2'))
+canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
+start_button = tk.Button(root, text="Start", highlightbackground="#494949", command=lambda: start_bet())
+title = tk.Label(root, bg="#494949", text="Ball Betting")
+betting_enter = tk.Entry(root, highlightbackground="#494949", width=30)
+betting_ok1 = tk.Button(root, highlightbackground="#494949", text='Ball 1', command = lambda: start('ball1'))
+betting_ok2 = tk.Button(root, highlightbackground="#494949", text='Ball 2', command = lambda: start('ball2'))
+healthbar1 = tk.Label(text=None,fg='red', bg="#494949")
+healthbar2 = tk.Label(text=None,fg='blue', bg="#494949")
 title.pack(pady=10)
 start_button.pack(pady=20)
 

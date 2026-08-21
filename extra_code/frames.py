@@ -1,6 +1,6 @@
 import random as ran
 
-def frame(canvas=None, root=None, ball1=None, ball2=None, winner=None):
+def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner):
     canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
     canvas.move(ball2['shape'], ball2['dx'], ball2['dy'])
     pos1 = canvas.coords(ball1['shape'])
@@ -29,12 +29,21 @@ def frame(canvas=None, root=None, ball1=None, ball2=None, winner=None):
         ball2['dy'] = -ball2['dy']
 
 
-
+    healthbar1.configure(text=f'{round(ball1['hp'],1)}/{ball1['max hp']}')
+    healthbar2.configure(text=f'{round(ball2['hp'],1)}/{ball2['max hp']}')
 
 
     if ball1['hp'] <= 0:
         winner = "ball2"
+        healthbar1.configure(text=f'0/{ball1['max hp']}')
+        canvas.delete(ball1['shape'])
+        canvas.delete(ball2['shape'])
+        checkforwinner(winner)
     elif ball2['hp'] <= 0:
         winner = "ball1"
+        healthbar2.configure(text=f'0/{ball2['max hp']}')
+        canvas.delete(ball1['shape'])
+        canvas.delete(ball2['shape'])
+        checkforwinner(winner)
     else:
-        root.after(16, lambda: frame(canvas=canvas, root=root, ball1=ball1, ball2=ball2, winner=winner))
+        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner))
