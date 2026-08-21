@@ -30,7 +30,7 @@ def stats(type):
     if type == {'default'}:
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: N/A'
     elif type == {'big'}:
-        text = 'HP: 150, Damage: 5, Velocity: 5,\nSpecial: Double Size Circle'
+        text = 'HP: 150, Damage: 7.5, Velocity: 5,\nSpecial: Double Size Circle'
     elif type == {'fast'}:
         text = 'HP: 75, Damage: 12, Velocity: 25,\nSpecial: N/A'
     elif type == {'hyperspeed'}:
