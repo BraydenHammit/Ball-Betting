@@ -33,6 +33,7 @@ def start_bet():
     try:
         textboxW.destroy()
     except: None
+    canvas.delete('all')
     ball1, ball2 = create_balls(canvas, root)
     textbox1.configure(text=f'Ball 1 will be: {ball1["type"].title()}', fg='red', bg="#494949")
     textbox2.configure(text=f'Ball 2 will be: {ball2["type"].title()}', fg='blue', bg="#494949")
@@ -98,6 +99,7 @@ def start(betNONGLOBAL):
                 healthbar1.pack(pady=20)
                 canvas.pack(expand=True, fill='none')
                 healthbar2.pack(pady=20)
+                
 
                 frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner, 0)
     except: None
