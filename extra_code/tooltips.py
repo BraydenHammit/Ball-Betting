@@ -38,7 +38,7 @@ def stats(type):
     elif type == {'vampire'}:
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Spawn at 75 Health, Lifesteal 25% of Damage.'
     elif type == {'splitting'}:
-        text = 'Hp: 175, Damage: 2.5, Velocity:10,\nSpecial: Splits in Two Every Hit'
+        text = 'HP: 175, Damage: 2.5, Velocity:10,\nSpecial: Splits in Two Every Hit'
     elif type == {'healer'}:
-            text = 'Hp: 30, Damage: 6.75, Velocity:10,\nSpecial: 5x Passive Regen Speed'
+            text = 'HP: 30, Damage: 6.75, Velocity:10,\nSpecial: 5x Passive Regen Speed'
     return text
