@@ -18,7 +18,7 @@ class toolTip:
         self.tooltip.wm_overrideredirect(True)
         self.tooltip.wm_geometry(f"+{x}+{y}")
         
-        self.label = tk.Label(self.tooltip, text=self.text, justify=tk.LEFT, background="#4A4A4A", relief=tk.SOLID, borderwidth=1, font=("ariel", "9", "normal"))
+        self.label = tk.Label(self.tooltip, text=self.text, justify=tk.LEFT, background="#4A4A4A", relief=tk.SOLID, borderwidth=1, font=("Arial", "9", "normal"))
         self.label.pack(ipadx=4, ipady=2)
 
     def hide(self, event=None):
@@ -27,18 +27,18 @@ class toolTip:
             self.tooltip = None
 
 def stats(type):
-    if type == {'default'}:
+    if type == 'default':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: N/A'
-    elif type == {'big'}:
+    elif type == 'big':
         text = 'HP: 150, Damage: 7.5, Velocity: 5,\nSpecial: Double Size Circle'
-    elif type == {'fast'}:
+    elif type == 'fast':
         text = 'HP: 75, Damage: 12, Velocity: 25,\nSpecial: N/A'
-    elif type == {'hyperspeed'}:
+    elif type == 'hyperspeed':
         text = 'HP: 25, Damage: 20, Velocity: 100,\nSpecial: N/A'
-    elif type == {'vampire'}:
+    elif type == 'vampire':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Spawn at 75 Health, Lifesteal 25% of Damage.'
-    elif type == {'splitting'}:
+    elif type == 'splitting':
         text = 'HP: 175, Damage: 2.5, Velocity:10,\nSpecial: Splits in Two Every Hit'
-    elif type == {'healer'}:
+    elif type == 'healer':
             text = 'HP: 30, Damage: 6.75, Velocity:10,\nSpecial: 5x Passive Regen Speed'
     return text

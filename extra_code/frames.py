@@ -128,8 +128,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         ball1['hp'] = ball1['max hp']
     if ball2['hp'] > ball2['max hp']:
         ball2['hp'] = ball2['max hp']
-    healthbar1.configure(text=f'{round(ball1['hp'],1)}/{ball1['max hp']}')
-    healthbar2.configure(text=f'{round(ball2['hp'],1)}/{ball2['max hp']}')
+    healthbar1.configure(text=f"{round(ball1['hp'],1)}/{ball1['max hp']}")
+    healthbar2.configure(text=f"{round(ball2['hp'],1)}/{ball2['max hp']}")
     if ball1['hp'] <= 0:
         healthbar1.configure(text=f'0/{ball1["max hp"]}')
     elif ball2['hp'] <= 0:
