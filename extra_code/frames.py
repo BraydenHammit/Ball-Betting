@@ -1,8 +1,15 @@
 import random as ran
 
-def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, splits=[]):
-    ball1['hp'] += ran.uniform(0.0,0.05)
-    ball2['hp'] += ran.uniform(0.0,0.05)
+def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, splits=[]):
+    frm += 1
+    if ball1['type'] == 'healer':
+        ball1['hp'] += ran.uniform(0.0,0.25)
+    elif not ball1['hp'] <= 0:
+        ball1['hp'] += ran.uniform(0.0,0.05)
+    if ball2['type'] == 'healer':
+        ball2['hp'] += ran.uniform(0.0,0.25)
+    elif not ball2['hp'] <= 0:
+        ball2['hp'] += ran.uniform(0.0,0.05)
     canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
     canvas.move(ball2['shape'], ball2['dx'], ball2['dy'])
     pos1 = canvas.coords(ball1['shape'])
@@ -48,8 +55,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
 
             if ball1['type'] == 'splitting':
                 if (tempPos[2] >= pos2[0] and tempPos[0] <= pos2[2] and tempPos[3] >= pos2[1] and tempPos[1] <= pos2[3]):
-                    ball2depletion = 2.5*(ran.uniform(0.05,2.5))
-                    tempdepletion = ball2['damage']*(ran.uniform(0.05,2.5))
+                    ball2depletion = 2.5*(ran.uniform(0.05,2.5))*((frm/1200)+1)
+                    tempdepletion = ball2['damage']*(ran.uniform(0.05,2.5))*((frm/1200)+1)
                     var[1][2] -= tempdepletion
                     ball2['hp'] -= ball2depletion
 
@@ -65,8 +72,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
 
             elif ball2['type'] == 'splitting':
                 if (tempPos[2] >= pos1[0] and tempPos[0] <= pos1[2] and tempPos[3] >= pos1[1] and tempPos[1] <= pos1[3]):
-                    ball1depletion = 2.5*(ran.uniform(0.05,2.5))
-                    tempdepletion = ball1['damage']*(ran.uniform(0.05,2.5))
+                    ball1depletion = 2.5*(ran.uniform(0.05,2.5))*((frm/1200)+1)
+                    tempdepletion = ball1['damage']*(ran.uniform(0.05,2.5))*((frm/1200)+1)
                     var[1][2] -= tempdepletion
                     ball1['hp'] -= ball1depletion
 
@@ -89,8 +96,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     pos2 = canvas.coords(ball2['shape'])
     try:
         if (pos1[2] >= pos2[0] and pos1[0] <= pos2[2] and pos1[3] >= pos2[1] and pos1[1] <= pos2[3]):
-            ball2depletion = ball1['damage']*(ran.uniform(0.05,2.5))
-            ball1depletion = ball2['damage']*(ran.uniform(0.05,2.5))
+            ball2depletion = ball1['damage']*(ran.uniform(0.05,2.5))*((frm/1200)+1)
+            ball1depletion = ball2['damage']*(ran.uniform(0.05,2.5))*((frm/1200)+1)
             ball1['hp'] -= ball1depletion
             ball2['hp'] -= ball2depletion
 
@@ -140,4 +147,4 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         canvas.delete('all')
         checkforwinner(winner)
     else:
-        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, splits=splits))
+        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, splits=splits))

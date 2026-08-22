@@ -81,7 +81,7 @@ def check_for_winner(winner):
 
 
 def start(betNONGLOBAL):
-    global money, bet, winner, betAmount
+    global money, bet, winner
     try:
         if (int(betting_enter.get()) >= 0) and (int(betting_enter.get()) <= money):
                 bet = [betNONGLOBAL,int(betting_enter.get())]
@@ -95,8 +95,8 @@ def start(betNONGLOBAL):
                 healthbar1.pack(pady=20)
                 canvas.pack(expand=True, fill='none')
                 healthbar2.pack(pady=20)
-                
-                frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner)
+
+                frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner, 0)
     except: None
 
 
