@@ -136,7 +136,13 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         healthbar2.configure(text=f'0/{ball2["max hp"]}')
 
 
-    if (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitting' or ball2['type'] == 'splitting')):
+
+    if (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitting' or ball2['type'] == 'splitting')) and (ball2['hp'] <= 0) and (
+    splits == [] or (ball2['type'] != 'splitting' or ball1['type'] == 'splitting')):
+        winner = "draw"
+        canvas.delete('all')
+        checkforwinner(winner)
+    elif (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitting' or ball2['type'] == 'splitting')):
         winner = "ball2"
         healthbar1.configure(text=f'0/{ball1['max hp']}')
         canvas.delete('all')
